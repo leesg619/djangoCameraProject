@@ -12,10 +12,8 @@ def index(request): #랭킹불러옴
     rank_all = stars.values('pdname').annotate(avg_stars=Avg('star')).order_by('-avg_stars')
     #pdname 별로 star의 평균값을 avg_stars에 넣고,내림차순정렬
     product=Product.objects.all()
-    first = rank_all.first() #1등을 따로 뺌(dic형으로 형변환이 됨 이거는 쿼리셋아님 )
-    k= first['pdname']
-    prod_first = Product.objects.get(id = int(k))
-    return render(request,'index.html', {'rank_all' : rank_all , 'product' : product, 'prod_first' : prod_first })
+
+    return render(request,'index.html', {'rank_all' : rank_all , 'product' : product,})
 
 # 상품 페이지
 def item_body(request):

@@ -36,22 +36,6 @@
     </div>
 </section>
 
-{% if prod_first %}
-<section id="banner">
-    <div class="content">
-        <header>
-            <h1>금주의 1위</h1>
-        </header>
-        <h2>{{ prod_first.pdname }}</h2>
-        <ul class="actions">
-        </ul>
-    </div>
-    <span class="image object">
-        <img src="{{ prod_first.pic.url }}" alt="금주의 1위"/> 
-    </span>
-</section>
-
-{% endif %}
 
 
 {% for rank in rank_all %}
