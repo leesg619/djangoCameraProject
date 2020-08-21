@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">내 정보</strong>
+<hr>
+<div class="article">
+    <div id="profile" style = 'height: 50px;'><pre><span>{{ request.user.username }}님</span></pre></div > 
+                
+        {% if user.gender == True %}
+        <div id="user_gender"  style = 'height: 50px;'><pre><span>성별 : ♂</pre></span></div>
+        {% else %}
+        <div id="user_gender"  style = 'height: 50px;'><pre><span>성별 : ♀</pre></span></div>
+        {% endif %}
+            
+    <div id="profile" style = 'height: 50px;'><pre><span>주소 : {{ request.user.address }}</span></pre></div> 
+    <div id="profile" style = 'height: 50px;'><pre><span>연락처 : {{ request.user.phone }}</span></pre></div>
+    <div id="profile" style = 'height: 50px;'><pre><span>나이 : {{ request.user.age }}</span></pre></div> 
+</div> 
+
+{% endblock %}

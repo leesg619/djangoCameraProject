@@ -1,0 +1,40 @@
+
+
+.item .info-area{
+    transform: rotateY(45deg);
+    transform-origin: 0% 0%;
+    transition: all .5s ease;
+    opacity: 0;
+}
+
+ .item .info-area::before {
+     position: absolute;
+     top: 0; right: 0; bottom: 0; left: 0;
+     z-index: 2;
+ }
+
+ .item .info-area::before {
+     content: "";
+     background-color: rgba(41, 128, 185, .5);
+ }
+
+ .item .text-area {
+     position: absolute;
+     left: 0; bottom: 0;
+     z-index: 3;
+     padding: 20px;
+ }
+
+
+ .item .title,
+ .item p {color: #fff;}
+ .item .bodyinfo {font-size: 24px;}
+ .item .lensinfo {font-size: 24px;}
+ .item .upload_date {font-size: 16px; margin: 5px 0;}
+
+ .item:hover .info-area {
+     transform: rotateY(0);
+     opacity: 1;
+ }
+
+

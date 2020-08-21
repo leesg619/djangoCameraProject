@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">사진첩</strong>
+<hr>
+
+{% for album in albums %}
+{% if albums %}
+<form action="." method='POST'>
+    {% csrf_token %}
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <input name = 'album_id' type = 'hidden' value = "{{ albums.id }}">
+            <img src="{{ album.pic.url }}" alt="" width="100px" height="90px">
+        </div>
+    </div>
+    <hr>
+</form>
+{% endif %}
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<!-- 아이콘/바로가기 모음 -->
+<section>
+    <div class="features">
+        <article>
+            <a href="{% url 'mypage' %}" class="icon fa-gem"></a>
+            <div class="content">
+                <h3>마이페이지</h3>
+                <p>마이페이지에 가유</p>
+            </div>
+        </article>
+        <article>
+            <a href="{% url 'album' %}" class="icon solid fa-paper-plane"></a>
+            <div class="content">
+                <h3>사진첩</h3>
+                <p>사람들이 어떤 제품으로 어떤 사진을 찍었는지 알고싶쥬?</p>
+            </div>
+        </article>
+        <article>
+            <a href="{% url 'rank' %}" class="icon solid fa-rocket"></a>
+            <div class="content">
+                <h3>랭킹</h3>
+                <p>바디/렌즈 별 랭킹을 자세히 알고싶쥬?</p>
+            </div>
+        </article>
+        <article>
+            <a href="http://google.com" class="icon solid fa-signal"></a>
+            <div class="content">
+                <h3>구글페이지</h3>
+                <p>구글선생님을 보고싶쥬?</p>
+            </div>
+        </article>
+    </div>
+</section>
+
+{% if prod_first %}
+<section id="banner">
+    <div class="content">
+        <header>
+            <h1>금주의 1위</h1>
+        </header>
+        <h2>{{ prod_first.pdname }}</h2>
+        <ul class="actions">
+        </ul>
+    </div>
+    <span class="image object">
+        <img src="{{ prod_first.pic.url }}" alt="금주의 1위"/> 
+    </span>
+</section>
+
+{% endif %}
+
+
+{% for rank in rank_all %}
+{% if rank %}
+<!-- index 1위 ~  -->
+<section>
+    <div class="posts">
+        <article>
+            <h2>{{ forloop.counter }}위</h2>
+
+            {% for product in product %}
+            {% if product.id == rank.pdname %}
+            <h3>{{ product.pdname }}</h3>
+            <img src="{{ product.pic.url }}" alt="" style="width: 300px; height: 300px;" />
+            {% endif %}
+            {% endfor %}
+            <hr>
+        </article>
+
+    </div>
+</section>
+
+{% endif %}
+{% endfor %}
+{% endblock %}
+ <!-- 대형 이미지 나열
+<section>
+    <header class="major">
+        <h2>Ante interdum</h2>
+    </header>
+    <div class="mini-posts">
+        <article>
+            <a href="#" class="image"><img src="images/pic07.jpg" alt="" /></a>
+            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        </article>
+        <article>
+            <a href="#" class="image"><img src="images/pic08.jpg" alt="" /></a>
+            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        </article>
+        <article>
+            <a href="#" class="image"><img src="images/pic09.jpg" alt="" /></a>
+            <p>Aenean ornare velit lacus, ac varius enim lorem ullamcorper dolore aliquam.</p>
+        </article>
+    </div>
+    <ul class="actions">
+        <li><a href="#" class="button">More</a></li>
+    </ul>
+</section>  -->

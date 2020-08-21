@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">상품 구매 취소</strong>
+<hr>
+
+
+
+<div class="row" style="text-align: left;">
+    <div class="col">
+        <a href="#"><img src="{{ body.pic.url }}" width="250" height="250" alt="" /></a>
+    </div>
+    <div class="col" style="margin-left: 80px;">
+        <br>
+        <br>
+        <h1>구매가 취소되었습니다.</h1>
+        <img src="{% static 'images/구매취소.jpg' %}" width=500px alt="" />
+            
+    </div>
+</div>
+<hr>
+
+
+
+{% endblock %}

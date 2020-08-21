@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">사진첩</strong>
+<hr>
+
+<!-- 로그인시에만 올릴수있게 -->
+<!-- {% if request.user.is_authenticated %} -->
+
+<!-- 검색 기능 시 업로드 기능 제거 -->
+{% if albums %}
+<h2><a href="#" onclick="window.open('/create_album', '_blank', 'width=500 height=500')">업로드</a></h2>
+<hr>
+{% endif %}
+
+<!-- {% endif %} -->
+
+<!-- 사진첩 -->
+{% for albums in albums %}
+{% if albums %}
+<!-- <form action="." method='POST'> -->
+    <!-- {% csrf_token %} -->
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <input name='album_id' type='hidden' value="{{ albums.id }}">
+            <img src="{{ albums.pic.url }}" alt="" width="850px" >
+            <br>
+            <button type="submit"><strong>삭제</strong></button>
+            <button type="submit"><a href="{% url 'album_detail' albums.pk %}">상세정보</a></button>
+        </div>
+    </div>
+    <hr>
+<!-- </form> -->
+{% endif %}
+
+{% endfor %}
+{% endblock %}
+
+<!-- <div class="col">
+    <a href="#" target="_blank"><img src="{% static 'images/pic01.jpg' %}" width="300" alt="" /></a>
+    <br>
+    <strong>바디 / 렌즈</strong>
+</div> -->

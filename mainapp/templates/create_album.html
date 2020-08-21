@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPLOAD</title>
+</head>
+<body>
+    <form action='{% url "create_album" %}' method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>사진</p>
+        <input type="file" name="img" accept="image/*">
+
+        <p>바디타입</p>
+        <select name=bodypd>
+            {% for bodypd in bodypd %}
+            <option>{{ bodypd.pdname }}</option>
+            {% endfor %}
+        </select>
+
+        <p>렌즈타입</p>
+        <select name=lenspd>
+            {% for lenspd in lenspd %}
+            <option>{{ lenspd.pdname }}</option>
+            {% endfor %}
+        </select>
+       
+        <div style="text-align: center;">
+            <br>
+            <button type= 'submit'>올리기</button>
+            <p style = 'color : red; font-size: 10px;'>{{ done }}</p>
+        </div>
+    </form>
+</body>
+</html>

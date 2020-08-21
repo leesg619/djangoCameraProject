@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">사진상세정보</strong>
+<link href="../assets/css/main.css" rel="stylesheet" type="text/css" media="all">
+
+<hr>
+
+{% for album in album %}
+{% if album %}
+<!-- <form action="." method='POST'>
+    {% csrf_token %} -->
+        <section id="banner">
+            <div class="content">
+                <header>
+                    <h3>{{ album.user }}님의 사진</h3>
+                    <div class="scrollable">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>사용바디</th>
+                            <th>렌즈종류</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td><a href="#"></a>{{ album.bodypd}}</td>
+                            <td>{{ album.lenspd }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </header>
+                <!-- <ul class="actions"> -->
+                    <!-- <li><a href="#" class="button big">삭제</a></li> -->
+                <!-- </ul> -->
+            </div>
+            <span class="image object">
+                <img src="{{ album.pic.url }}" style="width: 300px; height: 300px;" alt="" />
+            </span>
+        </section>
+        <p style = "text-align: center;">
+            <img src="{{ album.bodypd.pic.url }}"  alt="" style= "width : 250px; height:300px;" />
+            <img src="{{ album.lenspd.pic.url }}"  alt="" style= "width : 250px; height:300px;" />
+        </p>
+        <p>lens comment : 색감을 잘 담아줘요</p>
+        <p>body comment : 가벼워서 들고다니기 좋아요</p>
+
+<!-- </form> -->
+    
+{% endif %}
+
+{% endfor %}
+{% endblock %}

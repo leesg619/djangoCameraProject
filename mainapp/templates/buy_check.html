@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block contents %}
+{% csrf_token %}
+<br>
+<strong style="font-size: 25px;">구매 확인</strong>
+<hr>
+
+<h1>구매가 완료 되었습니다!</h1>
+<h1>앞으로도 많은 이용 바랍니다^^</h1>
+<hr>
+{% for buy in buys %}
+<div></div>
+<img src="{{  buy.product.pic.url }}"  alt="dd" width="700px">
+<h2>구매하신 상품: {{ buy.product.pdname }}</h2>
+<h2>구매한 제품 브랜드: {{ buy.product.brand }}</h2>>
+<h2>수량: {{ buy.countbuy }}</h2>
+<h2>가격: {{ buy.product.price }}원</h2>
+<h2>배송상태: {{ buy.dcheck }}</h2>
+
+
+{% endfor %}
+{% endblock %}
+
+
+<div id="profile" style = 'height: 50px;'><pre><span>주소 : {{ request.user.address }}</span></pre></div> 
+<div id="profile" style = 'height: 50px;'><pre><span>연락처 : {{ request.user.phone }}</span></pre></div>
+<div id="profile" style = 'height: 50px;'><pre><span>나이 : {{ request.user.age }}</span></pre></div> 

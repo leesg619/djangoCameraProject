@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+{% csrf_token %}
+<br>
+<strong style="font-size: 25px;">주문내역</strong>
+<hr>
+<style>
+  #button {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+  
+  }
+</style>
+
+  
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>IMAGE</th>
+          <th>PRODUCT NAME</th>
+          <th>PRODUCT BRAND</th>
+          <th>QUANTITY</th>
+          <th>PRICE</th>
+          <th>DELIVERY</th>
+          <th>TOTAL</th>
+          <th>ORDER CHANGE</th>
+        </tr>
+      </thead>
+      
+      {% for buy in buys %}
+      
+      <tbody>
+        <tr>
+          
+          <td><a href="#"><img src="{{  buy.product.pic.url }}"  alt="dd" width="100px" height="90px"></a></td>
+          <td>{{ buy.product.pdname }}</td>
+          <td>{{ buy.product.brand }}</td>
+          <td>
+            <form action = '{% url "buy_check"  user.pk%} ' style = "display : inline; "  method='post'>
+
+              {% csrf_token %}
+            <select name="countby">
+                <option value="1">1</option>
+                <!-- <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option> -->
+            </select>
+            
+          </td>
+          <td>{{ buy.product.price }}원</td>
+          <td>{{ buy.dcheck }}</td>
+          
+          <td><!--수량 * 가격 해서 total 적고 싶은데 안되네ㅠㅠ-->
+            <script>
+              var result = int({{buy.product.price}}) * int({{ buy.countby }});
+              document.write(result.toString());
+            </script>
+            </td>
+          <td>
+      
+            
+              <a href='{% url "not_buy" buy.id %}'>
+                
+                <input  name = 'post_id' type = 'hidden' value = "{{ buy.id }}" >
+                <button type = 'submit' style = " border: 1px solid red; background-color: rgba(0,0,0,0); color: red; padding: 5px;">삭제</button>
+                <p style = 'color : red; font-size: 10px;'></p>
+              </a>
+            
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+
+    </table>
+</div>
+
+
+
+<br>
+<strong style="font-size: 25px;">주문자 정보</strong>
+<hr>
+
+<div>
+
+  <table>
+    <thead>
+      <tr>
+        
+        <th>주문하시는 분</th>
+        <th>주소</th>
+        <th>휴대전화</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ request.user.username }}</td>
+        <td>{{ request.user.address }}</td>
+        <td>{{ request.user.phone }}</td>
+      </tr>
+    </tbody>
+    
+  </table>
+</div>
+
+<br>
+<strong style="font-size: 25px;">결제 예정 금액</strong>
+<hr>
+    
+<div >
+
+    <table>
+      <thead>
+        <tr>
+          <th>결제수단</th>
+          <th>총 주문 금액</th>
+        </tr>
+      </thead>
+
+      {% for buy in buys %}
+      
+      <tbody>
+        <tr>
+          {% if buy.pay == True %}
+          <td>무통장 입금</td>
+          {% else %}
+          <td>카드</td>
+          {% endif %}
+          <td>= {{ buy.product.price }}원</td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+</div>
+<div id = 'button'>
+
+  
+  <button type = 'submit' style = " border: 1px solid red; background-color: rgba(0,0,0,0); color: red; padding: 5px;">결제하기</button>
+  <p style = 'color : red; font-size: 10px;'></p>
+</form>
+
+
+
+</div>
+{% endblock %}

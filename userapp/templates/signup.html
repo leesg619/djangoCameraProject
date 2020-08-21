@@ -1,0 +1,44 @@
+{% load static %}
+
+<!--
+    아이디
+    비밀번호
+    주소
+    핸드폰
+    성별
+    나이
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'assets/css/signup.css' %}" />
+  <title>Document</title>
+</head>
+<body>
+<div class="signup-form">
+    <form class="" action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+      <h1>Sign Up</h1>
+      <input type="text" placeholder="이름" class="txtb" name="username">
+      <input type="email" placeholder="이메일" class="txtb" name="email">
+      <input type="password" placeholder="비밀번호" class="txtb" name="password">
+      <input type="password" placeholder="비밀번호 확인" class="txtb" name="re_password">
+      <input type="text" placeholder="주소" class="txtb" name="address">
+      <input type="text" placeholder="나이" class="txtb" name="age">
+      <input type="text" placeholder="전화번호" class="txtb" name="phone">
+</div>
+
+    <div class="signup-form-2">
+      여자<input type="radio" placeholder="여자" class="txtb" name="gender" value = "1">
+      남자<input type="radio" placeholder="남자" class="select" name="gender" value = "2">
+    </div>
+
+    <div class="signup-form-3">
+      <a href="#"><input type="submit" value="회원가입" class="signup-btn"></a>
+      <a href="#">이미 아이디가 있으신가요?</a>
+    </div>
+</form>
+</body>
+</html>

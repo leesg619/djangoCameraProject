@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block contents %}
+{% csrf_token %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/mypic.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/fullpage.min.css' %}">
+    <script src="https://kit.fontawesome.com/03594dd5b7.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.css" rel="stylesheet"> 
+
+</head>
+<br>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.6.6/jquery.fullPage.min.js"></script>
+<script src="{% static 'assets/js/fullpagemin.js' %}"></script>
+<script src="{% static 'assets/js/jquery.fullpage.js' %}"></script>
+<script src="{% static 'assets/js/jqeury.min.js' %}"></script>
+
+
+<strong style="font-size: 25px;">{{ request.user.username }}님이 게시한 사진</strong>
+<hr>
+
+{% for pic in pic %}
+<div id="fullpage">
+    <div class="section">
+        <div class="item">
+            <div id="img">
+                <a href="#"><img src="{{ pic.pic.url }}"  alt="사용자 등록 사진" width="880px" ></a>
+            </div>
+            <div class="info-area">
+                <div class="text-area">
+                    <br>
+                    <p class="bodyinfo">바디 정보 : {{ pic.bodypd }}</p>
+                    <p class="lensinfo">렌즈 정보 : {{ pic.lenspd }}</p>
+                    <p class="upload_date">등록일 : {{ pic.date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}
+

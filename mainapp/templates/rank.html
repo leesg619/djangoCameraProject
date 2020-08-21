@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">랭킹</strong>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <h2>바디 순위</h2>
+    </div>
+    {% for result_body in result_body %}
+        {% if result_body %}
+            {% for body in body %}
+                {% if body.id == result_body.pdname %}
+    
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <img src="{{ body.pic.url }}" alt="" width="100px" height="90px">
+            <br>
+            <a href="{% url 'item_detail' body.pk %}">상세정보</a>
+            
+            <span>순위 : {{ forloop.counter }}</span> 
+
+            <span>평점 : {{ result_body.avg_stars }}</span>
+            
+        </div>
+    </div>
+    <hr>
+                {% endif %} 
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</div>
+<hr>
+{{ rank }}
+{{ result }}
+<hr>
+
+<div class="row">
+    <div class="col">
+        <h2>렌즈 순위</h2>
+    </div>
+    {% for result_lens in result_lens %}
+        {% if result_lens %}
+            {% for lens in lens %}
+                    {% if lens.id == result_lens.pdname %}
+    <div class="row" style="text-align: center;">
+        <div class="col">
+            <img src="{{ lens.pic.url }}" alt="" width="100px" height="90px">
+            <br>
+            <a href="{% url 'item_detail' lens.pk %}">상세정보</a>
+            <span>순위 : {{ forloop.counter }}</span> 
+            <span>평점 : {{ result_lens.avg_stars }}</span>
+        </div>
+    </div> 
+    <hr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+</div>
+
+{% endblock %}

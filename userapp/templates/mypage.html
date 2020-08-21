@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">My Page</strong>
+<div id="profile" style = 'height: 50px;'><pre><span>{{ request.user.username }}님 환영합니다!</span></pre></div> 
+<hr>
+<div class="scrollable">
+<table>
+    <thead>
+    <tr>
+        
+        <strong></strong><th><a href="{% url 'myinfo' %}" class="count"><span id="">내 정보</span></a>  <br>      <img src="{% static 'images/info.png' %}" alt="내 정보" width=100px></th></strong>
+
+        <strong></strong><th><a href="{% url 'myreview' request.user.pk %}" class="count"><span id="">내 리뷰</span></a><br>        <img src="{% static 'images/review.png' %}" alt="내 리뷰" width=100px></th></strong>
+
+        <strong></strong><th><a href="{% url 'myitem' request.user.pk %}" class="count"><span id="">구매 상품</span></a><br>        <img src="{% static 'images/photograph.png' %}" alt="구매 상품" width=100px></th></strong>
+
+        <strong></strong><th><a href="{% url 'mypic' %}" class="count"><span id="">내 사진</span></a><br>        <img src="{% static 'images/album.png' %}" alt="내 사진" width=100px></th></strong>
+
+    </tr>
+    </thead>
+
+</table>
+</div>
+{% endblock %}

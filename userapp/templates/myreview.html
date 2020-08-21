@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block contents %}
+{% csrf_token %}
+<br>
+<strong style="font-size: 25px;">내 리뷰</strong>
+<hr>
+
+{% for review in content %}
+<div></div>
+<h2>{{ review.content }}</h2>
+{{ review.date }}
+{{ review.star }}
+{{ review.product }}
+<hr>
+{% endfor %}
+{% endblock %}
+
+
+<div id="profile" style = 'height: 50px;'><pre><span>주소 : {{ request.user.address }}</span></pre></div> 
+<div id="profile" style = 'height: 50px;'><pre><span>연락처 : {{ request.user.phone }}</span></pre></div>
+<div id="profile" style = 'height: 50px;'><pre><span>나이 : {{ request.user.age }}</span></pre></div> 

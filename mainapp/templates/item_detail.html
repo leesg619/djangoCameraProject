@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block contents %}
+
+<br>
+<strong style="font-size: 25px;">제품 상세</strong>
+<hr>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link href="../assets/css/main.css" rel="stylesheet" type="text/css" media="all">
+</head>
+<body id="top">
+<!-- ################################################################################################ -->
+<div class="wrapper row0">
+  <div id="topbar" class="hoc clear"> 
+    
+  </div>
+</div>
+<div class="wrapper row1">
+  
+</div>
+<div class="bgded overlay" style="background-image:url('../images/demo/backgrounds/01.png');">
+  
+</div>
+{% for item in item %}
+<div class="wrapper row3">
+  <main class="hoc container clear"> 
+    <!-- main body -->
+    <div class="content">
+      <h2>{{ item.pdname }}<form action = '{% url "buy" user.pk%} ' style = "display : inline; ">
+          <button type = 'submit' style = "float:right; border: 1px solid red; background-color: rgba(0,0,0,0); color: red; padding: 5px;">결제하기 Go!</button>
+          <p style = 'color : red; font-size: 10px;'></p>
+        </form></h2>
+      
+      <br><br>
+      <p style = "text-align: center;">
+      <img src="{{ item.pic.url }}"  alt="" style= "width : 500px; " />
+      </body>
+      </p>
+      <p>풀프레임미러리스용 / 표준줌렌즈 / 소니FE / 아트렌즈(최상급) / 15군 / 19매 / 밝기:F2.8 / 최단촬영거리:18cm / 필터구경:82mm / 방진방적 / 스테핑모터 / 원형조리개 / 비구면 / 저분산 / 인물용렌즈 / 무게:835g / 애칭:시계륵 / 줌 잠금스위치 / AFL버튼 / 멀티코팅 / 나노다공성코팅</p>
+      <h2>Product Detail</h2>
+      <div class="scrollable">
+        <table>
+          <thead>
+            <tr>
+              <th>사용바디</th>
+              <th>마운트타입</th>
+              <th>렌즈종류</th>
+              <th>프리미엄렌즈</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><a href="#"></a>풀프레임미러리스용</td>
+              <td>소니FE</td>
+              <td>표준줌렌즈</td>
+              <td>아트렌즈(최상급)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="comments">
+        <h2>Review</h2>
+        <ul>
+          {% for review in review %}
+          <li>
+            <article>
+                By <a href="#">{{ review.user }}</a><br><time>{{ review.date }}</time>
+              <div class="comcont">
+                <br>
+                <p>Product : {{ review.product }}</p>
+                <p>Comment : {{ review.content }}</p>
+                <!-- <img src="{% static 'images/review1.jpg' %}" alt=""  style= "width :200px; height:150px; " />float : left 사진 왼쪽에 정렬하고싶으면~ -->
+              </div>
+            </article>
+          </li>
+          
+          {% endfor %}
+        </ul>
+        <h2>Write A Review</h2>
+        <form action="{% url 'create_review' %}" method="post">
+          {% csrf_token %}
+          <div class="one_third first">
+            <label for="name">작성자 *</label>
+            <input type="text" name="name" id="name" value="{{ request.user }}" size="22" required readonly>
+          </div>
+          <div class="one_third">
+            <label for="lenstype">제품군 *</label>
+            <input type="text" name="pdname" value="{{ item.pdname }}" size="22" required readonly>
+          </div>
+          <div class="block clear"><br>
+            <label for="content">리뷰를 작성해주세요 *</label>
+            <textarea name="content" cols="25" rows="10"></textarea>
+          </div>
+          <div class="block clear"><br>
+            <label for="star">별점 *</label>
+            <select name="star">
+              <option value="1">1점</option>
+              <option value="2">2점</option>
+              <option value="3">3점</option>
+              <option value="4">4점</option>
+              <option value="5">5점</option>
+            </select>
+          </div><br>
+          <div>
+            <input type="submit" name="submit" value="작성 완료">
+            &nbsp;
+            <input type="reset" name="reset" value="Reset">
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- / main body -->
+    <div class="clear"></div>
+  </main>
+</div>
+
+{% endfor %}
+{% endblock %}

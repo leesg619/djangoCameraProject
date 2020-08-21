@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+{% csrf_token %}
+
+
+<br>
+<strong style="font-size: 25px;">구매상품</strong>
+<hr>
+    
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>IMAGE</th>
+          <th>PRODUCT NAME</th>
+          <th>PRODUCT BRAND</th>
+          <th>QUANTITY</th>
+          <th>PRICE</th>
+          <th>DELIVERY</th>
+          <th>TOTAL</th>
+          <th>ORDER CHANGE</th>
+    
+        </tr>
+      </thead>
+
+      {% for buy in buys %}
+      <tbody>
+        <tr>
+          <td><a href="#"><img src="{{  buy.product.pic.url }}"  alt="dd" width="100px" height="90px"></a></td>
+          <td>{{ buy.product.pdname }}</td>
+          <td>{{ buy.product.brand }}</td>
+          <td>{{ buy.countbuy }}</td>
+          <td>{{ buy.product.price }}원</td>
+          <td>{{ buy.dcheck }}</td>
+          <td><!--수량 * 가격 해서 total 적고 싶은데 안되네ㅠㅠ-->
+            calc({{ buy.product.price }} *  {{ buy.countbuy }})
+            </td>
+          <td>
+          <td>
+      
+            <form action = '{% url "not_buy"  user.pk%} ' style = "display : inline; ">
+                
+                
+                <input  name = 'post_id' type = 'hidden' value = "{{ buy.id }}" >
+                <button type = 'submit' style = " border: 1px solid red; background-color: rgba(0,0,0,0); color: red; padding: 5px;">결제 취소</button>
+                <p style = 'color : red; font-size: 10px;'></p>
+                    
+            </form>
+            
+          </td>
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+</div>
+        
+    
+    <a href="{% url 'item_body' %}">상품 구경 가기</a>
+    
+
+{% endblock %}

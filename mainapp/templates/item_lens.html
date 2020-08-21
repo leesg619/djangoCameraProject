@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contents %}
+<br>
+<strong style="font-size: 25px;">상품</strong>&nbsp;&nbsp;&nbsp;Item&nbsp;&nbsp;&nbsp;렌즈
+<hr>
+
+{% for lens_star in lens_star %}
+{% if lens_star %}
+{% for lens in lens %}
+{% if lens.id == lens_star.pdname %}
+
+
+<div class="row" style="text-align: left;">
+    <div class="col">
+        <a href=""><img src="{{ lens.pic.url }}" width="250" height="250" alt="" /></a>
+    </div>
+    <div class="col" style="margin-left: 80px;">
+        <br>
+        <br>
+        <h3>{{ lens.pdname }}</h2>
+            <strong>제조사 : {{ lens.brand }}</strong>
+            <br>
+            <strong>가격 : {{ lens.price }}원</strong>
+            <br>
+            <h3>{{ product_lens.pdname }}</h2>
+                <strong>제조사 : {{ product_lens.brand }}</strong>
+                <br>
+                <strong>가격 : {{ product_lens.price }}원</strong>
+                <br>
+                <a href="{% url 'item_detail' lens.pk %}">상세정보</a>
+                <br>
+                <a href="{% url 'buy' lens.pk %}">구매하기</a>
+                <br>
+                <strong>평점 : {{ lens_star.avg_stars }}</strong>
+        </div>
+            
+    </div>
+</div>
+<hr>
+
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endfor %}
+
+{% endblock %}
